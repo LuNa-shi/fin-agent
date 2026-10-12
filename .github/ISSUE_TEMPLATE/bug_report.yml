@@ -1,0 +1,72 @@
+name: Bug report
+description: Report a reproducible defect in Fin Agent
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please search existing issues first. Do not include API keys, credentials, private reports, raw provider payloads, or user data.
+  - type: input
+    id: version
+    attributes:
+      label: Commit or version
+      description: Which commit or release shows the problem?
+      placeholder: "d6cacf3 or v1.0.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Idea Generation
+        - Project or Run Analysis
+        - Report Library
+        - Worldview or Claim Library
+        - Decision or Portfolio
+        - Agent or provider runtime
+        - Tooling or data boundary
+        - Frontend
+        - Documentation
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+      description: Provide the smallest reproducible sequence using synthetic or public data.
+      placeholder: |
+        1. Configure ...
+        2. Run ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs or test output
+      description: Remove secrets, endpoints, raw provider payloads, and local paths before posting.
+      render: text
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include OS, Node.js version, and whether the run was demo or live.
+      placeholder: "Ubuntu 24.04, Node 22.19.0, DEMO_MODE=true"
+    validations:
+      required: true

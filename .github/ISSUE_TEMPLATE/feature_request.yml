@@ -1,0 +1,40 @@
+name: Feature request
+description: Propose an improvement to Fin Agent
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please describe the user problem first. Features that affect research authority, provider execution, or durable storage should explain the safety and recovery implications.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+      description: What user task is currently difficult or impossible?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Describe the intended behavior from a user's perspective.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: textarea
+    id: boundaries
+    attributes:
+      label: Data and safety boundaries
+      description: What should the feature be allowed to read, write, publish, or execute? How should failures and recovery work?
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Suggested scope
+      description: Identify a small first slice that could be implemented and tested independently.

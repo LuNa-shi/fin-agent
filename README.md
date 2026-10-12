@@ -1,148 +1,216 @@
-# Fin agent · 金融分析智能体
+# Fin Agent
 
-Fin agent 是一个本地全栈投资研究系统。产品主链为：
+[![Clean Install](https://github.com/LuNa-shi/fin-agent/actions/workflows/clean-install.yml/badge.svg)](https://github.com/LuNa-shi/fin-agent/actions/workflows/clean-install.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Node.js](https://img.shields.io/badge/Node.js-%3E%3D22.19.0-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 
-```text
-Idea Generation
-  -> IdeaArtifact / ProjectSeed
-  -> Project Space
-  -> explicit analyze trigger
-  -> Run Analysis
-  -> Report / Conclusion
-  -> Decision / Portfolio
+Fin Agent is a local-first investment research workspace. It turns ideas, market data, research evidence, model analysis, reports, worldview updates, and portfolio decisions into a durable and inspectable chain of work.
+
+```mermaid
+flowchart LR
+  A[Idea Generation] --> B[Project Space]
+  B -->|explicit analyze command| C[Run Analysis]
+  C --> D[Evidence and Report]
+  D --> E[Decision and Portfolio]
+  D --> F[Report Library]
+  F --> G[Canonical Worldview]
+  F --> H[Claim Library]
 ```
 
-开发或操作仓库前先读 [AGENTS.md](AGENTS.md)。贡献与验证规则见 [CONTRIBUTING.md](CONTRIBUTING.md)。本开源版本不包含原私有仓库的会议纪要、内部参考资料、历史档案及运行评测数据。
+The project is experimental software for research workflows. It does not place trades, custody funds, or provide personal investment advice.
 
-## 当前产品
+## What it does
 
-### Idea、Project 与研究报告
+### Durable idea generation
 
-- Idea Generation 使用 durable 六节点 Workflow。每次运行冻结输入，确定性采集来源，由 Agent 生成和评分，并持久化所有通过结构校验、ticker 规范化和去重的 Idea。
-- Idea→Project 是确定性命令。创建 Project 不会自动调用模型或启动分析。
-- `POST /api/projects/:id/analyze` 通过 `RunAnalysisService` 启动分析。Service 负责 durable run id、队列、同 Project 去重、暂停、状态和重启恢复。
-- Run Analysis 使用八节点 `run-analysis.v2` Workflow：初始化、规划、候选筛选、研究轮次、报告撰写、并行审核、结论和最终发布。
-- Decision / Portfolio 只消费通过当前 run、ArtifactRef、lineage、对象 digest 和发布元数据校验的报告包。
+The Idea Generation workflow collects market context, builds diversification constraints, generates candidates, verifies ticker and provenance data, reviews quality, and persists accepted Ideas. Each run freezes its input snapshot and can be inspected or resumed.
 
-### Report Library 与 Canonical Worldview
+### Project-based research
 
-- Run Analysis 报告和受控 backfill 通过 `ReportAdmissionService` 进入共享 Report Library。
-- Admission 先持久化候选，再生成私有、digest-bound Report Overview。ReportVersion 与 Overview 作为隐藏 pair 准备，并由最后写入的 admission marker 原子公开。
-- 公开 ReportVersion 的 Worldview processing status 只有 `Pending` 和 `Processed`；batch 与 ingestion 使用各自的生命周期状态。Overview 不是公共产品面，只能由冻结的 Canonical Worldview capability 读取。
-- Scheduled daily producer 以最多 100 个预注册 item 形成 durable Daily Report Batch。显式关闭 batch 后发布一次 Canonical Worldview processing trigger。
-- 每个 Canonical Worldview trigger 只选择 admission order 中最老的一个 bounded `Pending` group；Report 数硬上限是 100，配置不能提高。之后到达或超出本组预算的 Reports 保持 Pending。
-- Run workspace 在首次模型调用前持久化并做 digest 校验。它冻结 ordered Reports/Overviews、完整 current Worldview、完整 current Claims 与 compact Claim table、route/Prompt/retry policies、bounds、capabilities 和 manifest。
-- 一个 run 最多 3 个 fresh complete Agent attempts；每个 attempt 最多 5 个 model API attempts。耗尽后记录 `FAILED_EXHAUSTED`，后续 Pending work 不得越过该 frozen workspace。
-- Core Agent 先决定 Worldview `KEEP`/`UPDATE`，再输出零个或多个独立 Claim `ADD`/`UPDATE`/`NOOP` actions。Claim Library v1 保存 falsifiable Claims、immutable versions、actions、rejections、exact evidence 和 run/publication lineage；同 target conflict 采用 first-valid-wins。
-- 一次成功 run 先 stage Worldview outcome、Claim records、attempt audit 与 exact Processed receipts，最后只提交一个 authoritative `worldview-run-publication-marker.v1`。marker 前 staged objects 不可见，marker 后 recovery 不再调用 Agent。Report processing status 只由 exact committed receipt 决定。
-- `/api/worldview*` 与 `/api/claims*` 只读。前端把 Worldview Processing Log、Worldview Versions 与 Claim Library 保持为独立产品面。
+An Idea can become a Project through a deterministic command. Creating a Project does not call a model or start analysis. The user explicitly starts analysis with a selected research intensity and optional industry/company templates.
 
-Legacy Daily Worldview 的 Agent、Workflow、Store、Schema、composition、API 和 UI 已从 active runtime 删除。历史磁盘文件原地保留，但不再定义产品语义。Self-evolving belief、scheduler、adaptor memory、verifier 和 learning UI 也已删除。
+Run Analysis uses the canonical `run-analysis.v2` workflow:
 
-### Agent catalog 与 runtime overlays
+1. Initialize a checkpoint.
+2. Plan research.
+3. Select candidates.
+4. Run data, industry, and company research rounds.
+5. Compose a report.
+6. Run parallel evidence, requirement, logic, and scorecard reviews.
+7. Synthesize a conclusion.
+8. Publish the final Project artifacts.
 
-- [`backend/src/agents/registry.js`](backend/src/agents/registry.js) 是 active Agent definitions 的显式注册来源。
-- [`backend/src/tools/toolCatalog.js`](backend/src/tools/toolCatalog.js) 是工具注册的唯一来源。
-- `AgentExecutionRuntime` 为 Workflow 和 direct command 构造统一请求；默认 backend 为 `IdempotentAgentBackend -> ConcurrentAgentBackend -> PiAgentBackend`。
-- checked-in System Prompt 和 ordered Tool Use 是专家 baseline。产品可通过 `AgentRuntimeService`、`/api/agents*` 和 `/api/skills*` 保存 runtime overlays 与 Skills，并在执行时解析 effective definition。
+Runs have durable identities, checkpoints, artifacts, events, pause/resume behavior, recovery, and safe public projections.
 
-Human Review 的 contracts、store、controller 和 resume 实现仍保留在源码中，但当前 server composition 没有注入 controller，也没有公开 Human Review API。默认 composition 遇到 Human Review route 时记录 bypass 并继续，而不是打开交互任务；前端把 `review-required` 当作退役的历史状态。
+### Evidence and reports
 
-## 主要 API
+Research outputs are stored as typed artifacts with schema, digest, producer, and lineage information. Reports enter the shared Report Library through `ReportAdmissionService`. Admission stages an immutable candidate and a private, digest-bound Report Overview before atomically publishing a ReportVersion.
 
-当前 Express composition 提供以下 route families：
+The Report Library keeps public processing state intentionally small: a ReportVersion is either `Pending` or `Processed`. `Processed` is granted only by an exact committed receipt from a successful Canonical Worldview publication.
 
-- 系统与配置：`/api/status`、`/api/settings`、`/api/providers/openai-compatible/models`、`/api/keys`、`/api/llm/usage`
-- Agent、Skill 与工具：`/api/agents*`、`/api/skills*`、`/api/tools*`
-- Workflow projection：`/api/workflows/run-analysis`、`/api/workflows/idea-generation`
-- Daily evidence 与 Report Library：`/api/daily-reports*`、`/api/report-library*`
-- Canonical Worldview 与 Claims：`/api/worldview*`、只读 `/api/claims*`
-- Idea 与 Project：`/api/ideas*`、`/api/classify`、`/api/projects*`
-- Research 与 template：`/api/research/sources*`、`/api/templates*`
-- Decision 与 Portfolio：`/api/portfolio*`、ranking、ledger、contract、mandate 和 calibration routes
+### Canonical Worldview and Claim Library
 
-Project create/quick 不启动分析。Analyze 公开输入只接受 `intensity`、`industryTemplate`、`companyTemplate` 和 `resume`；run identity、backend、demo/live 和内部 execution scope 不能由 HTTP 覆盖。
+The Canonical Worldview is the system's durable body of investment reasoning. The Claim Library is a separate authority for falsifiable investment judgments, immutable Claim versions, action history, rejection history, evidence, and publication lineage.
 
-## 架构入口
+One bounded Worldview run freezes its Reports, Overviews, current Worldview, current Claims, model configuration, retry policy, capabilities, and workspace digest before the first model call. The Core Worldview Agent produces a `KEEP` or `UPDATE` decision and ordered `ADD`, `UPDATE`, or `NOOP` Claim actions.
+
+Worldview results, Claim changes, attempt audits, and exact Processed receipts are staged together and become visible only after one authoritative publication marker. Invalid individual Claim actions can be rejected independently; storage, integrity, locking, or publication failures fail the whole publication.
+
+### Decision and portfolio tools
+
+The Decision domain provides candidate ranking, portfolio promotion, position weights, tracking, snapshots, contracts, ledger entries, calibration, and decision traces. Decision consumers only accept research packages that pass their identity, artifact, lineage, digest, and publication checks.
+
+### Inspectable Agent runtime
+
+Production Agent calls use a single execution boundary:
+
+```text
+AgentExecutionRuntime
+  -> IdempotentAgentBackend
+  -> ConcurrentAgentBackend
+  -> PiAgentBackend
+```
+
+Checked-in Agent definitions and ordered Tool Use policies are the protected baseline. Runtime Agent overlays and Skills are data-backed extensions that can narrow the allowed tool set but cannot silently expand it. `backend/src/tools/toolCatalog.js` is the single tool registration authority.
+
+## Design principles
+
+- **Explicit commands:** Project creation, analysis, recovery, admission, and publication have separate boundaries.
+- **Durable work:** Long-running operations have stable identities, checkpoints, events, artifacts, and recovery paths.
+- **Evidence before conclusions:** Structured evidence, citations, digests, and source provenance travel with research outputs.
+- **Fail closed:** Invalid configuration, unavailable providers, unsafe scope, corrupted data, and publication failures do not become fake success.
+- **Immutable history:** Reports, Worldview versions, Claim versions, artifacts, receipts, and audit records are retained as history.
+- **Small public projections:** Public APIs hide credentials, raw provider payloads, private Overviews, local paths, and internal storage details.
+- **Local-first operation:** Runtime data and credentials stay in local ignored directories unless an operator deliberately chooses another deployment model.
+
+## Repository layout
 
 ```text
 backend/src/
-  agents/          definitions、registry、runtime overlays、execution request boundary
-  core/            Pi backend、models、contracts、workflow kernel、context、tools、validation
-  domains/         ideas、reports、worldview、claims、research、decision
-  project-space/   Project files、RunStore、ArtifactStore、EventBus、Workspace
-  tools/           tool catalog 与 executor composition
-  workflows/       idea-generation、run-analysis、Canonical Worldview processing
-  lib/             无领域归属的纯函数和基础设施 helper
-  config.js        runtime configuration composition root
-  server.js        Express/API composition root
-frontend/          React + Vite product UI
-documents/         reviewed references and generated source projections
-artifacts/         evaluation and reviewer-gate evidence
+  agents/          Agent definitions, registry, overlays, and execution boundary
+  core/            Models, contracts, workflow kernel, tools, validation, persistence
+  domains/         Ideas, reports, worldview, claims, research, and decisions
+  project-space/   Projects, runs, artifacts, events, workspaces, and projections
+  workflows/       Idea Generation, Run Analysis, and Canonical Worldview workflows
+  tools/           Tool catalog and provider-backed tool executors
+  server.js        Express composition root and HTTP projections
+frontend/src/      React product UI
+documents/         Reviewed references and source-generated projections
+artifacts/         Evaluation and reviewer-gate evidence
+scripts/           Repository automation
 ```
 
-精确 Workflow node、Agent contract consumer 和 artifact authority 请直接读取 [`documents/generated/`](documents/generated/) 中的 source-derived projections。当前手写边界说明见 [`documents/current-agent-io.md`](documents/current-agent-io.md)。
+The current runtime boundaries are documented in [`documents/current-agent-io.md`](documents/current-agent-io.md). Workflow, contract-consumer, and artifact-authority details are generated from source under [`documents/generated/`](documents/generated/). Historical architecture drafts are kept under [`documents/架构设计/`](documents/架构设计/) and should not be treated as current runtime authority.
 
-## 环境与启动
+## Requirements
 
-要求 Node.js `>=22.19.0`。正式 provider id 只有 `openai-compatible` 和 `deepseek`。Pi 依赖固定为：
+- Node.js `>=22.19.0`
+- npm
+- Provider credentials only when running provider-backed work
+- API credentials for optional data tools such as FMP, FRED, Perplexity, or Tavily
+
+The Pi packages are pinned to:
 
 - `@earendil-works/pi-ai@0.80.6`
 - `@earendil-works/pi-agent-core@0.80.6`
 
-安装并运行：
+## Quick start
+
+Install dependencies and build the frontend:
 
 ```bash
-cd backend && npm install
-cd ../frontend && npm install && npm run build
-cd ../backend && npm start
+cd backend
+npm ci
+
+cd ../frontend
+npm ci
+npm run build
 ```
 
-默认服务地址为 `http://localhost:8787`，backend 直接托管 `frontend/dist`。前端改动后重新 build，backend 改动后重启进程。
-
-前端 UI-only 开发：
+Create a local environment file if you need provider-backed execution:
 
 ```bash
-cd frontend && npm run dev
+cp backend/.env.example backend/.env
 ```
 
-Vite 固定使用 `8878`，且不代理到部署服务。需要完整 API 的前端验证时，先 build frontend，再由使用隔离 `FIN_DATA_DIR` 的测试 backend 在 `8878` 托管 `frontend/dist`。
+Fill in only the credentials and provider settings you intend to use. `backend/.env` is ignored by Git and must never be committed.
 
-正式 provider id 只有 `openai-compatible` 与 `deepseek`。仓库默认路由为 `openai-compatible/gpt-5.6-sol/high`，未显式覆盖的 small/main/reflection tier 跟随该路由。OpenAI-compatible model id 从服务端 `/models` 原样使用。选中的 provider/model 不可用时 fail closed，不做跨 provider replay或自动 demo fallback。真实模型测试必须显式 opt in。
+Start the backend, which serves the built frontend:
 
-Agent 操作部署与测试服务时必须遵守 [端口规则](AGENTS.md#ports)和 [provider-backed test policy](AGENTS.md#provider-backed-test-policy)。测试 backend 通常设置 `AUTO_RESUME=false`。确定性 demo 只有显式 `DEMO_MODE` 或明确 runtime demo route 才启用；provider/model 不可用时不会自动回退到 demo 或其他 provider。
+```bash
+cd backend
+npm start
+```
 
-## 验证
+Open <http://localhost:8787>.
 
-唯一完整 clean-install 合入门禁：
+For frontend-only development:
+
+```bash
+cd frontend
+npm run dev
+```
+
+Vite uses port `8878`. It does not proxy to the deployment service.
+
+## Providers and execution modes
+
+The supported provider identifiers are `openai-compatible` and `deepseek`. The repository default route is `openai-compatible/gpt-5.6-sol/high`; the `small`, `main`, and `reflection` tiers follow the default route unless explicitly configured.
+
+Provider and model selection fails closed when the selected model is unavailable. The runtime does not silently switch providers, replay against another model, or fall back to demo mode. Deterministic demo behavior is available only through an explicit `DEMO_MODE` or documented demo route.
+
+Ordinary tests, CI, startup, and deployment do not create provider-backed test tasks. Real model validation requires an explicit live opt-in, an isolated `FIN_DATA_DIR`, and an evidence root. See the repository policy in [`AGENTS.md`](AGENTS.md).
+
+## Verification
+
+Run focused checks while developing:
+
+```bash
+cd backend
+npm test
+npm run lint
+
+cd ../frontend
+npm test
+npm run build
+```
+
+The complete clean-install gate is:
 
 ```bash
 node scripts/clean-install-gate.mjs
 ```
 
-该入口执行 backend clean install、tests、Agent asset Golden、零 warning lint、deterministic demo smoke，以及 frontend clean install、tests 和 production build。开发时可先运行 focused checks。详细规则和 Prompt/Tool policy 变更流程见 [CONTRIBUTING.md](CONTRIBUTING.md)。
-
-## 运行数据
-
-运行数据位于 ignored `backend/data/`。测试不得写入该目录。需要重置真实运行数据时，先获得用户授权并优先归档：
+It performs clean installs, backend tests, Agent asset Golden checks, lint, deterministic demo smoke, frontend tests, and a production build. Before submitting a change, also run:
 
 ```bash
-cd backend && npm run archive:runtime
+git diff --check
+git status --short
 ```
 
-Owner-authorized 旧 authority cutover 使用独立 guarded 命令。必须先 dry-run，并提供 exact `.../claims`、exact `.../canonical-worldview` roots 和 acknowledgement `RESET_LEGACY_CLAIM_AND_CANONICAL_WORLDVIEW_AUTHORITIES`：
+Passing automated checks does not establish the quality of a real investment report. Provider-backed quality evaluation is a separate, explicitly authorized activity.
 
-```bash
-npm run reset:worldview-claim-authorities -- --dry-run \
-  --claims-root /absolute/path/to/claims \
-  --canonical-worldview-root /absolute/path/to/canonical-worldview \
-  --acknowledge-owner-authorized-reset RESET_LEGACY_CLAIM_AND_CANONICAL_WORLDVIEW_AUTHORITIES
-```
+## Data and security
 
-Active Claim Library 默认位于 `FIN_DATA_DIR/claim-library/`。该命令不接入 server startup，并拒绝 repository、filesystem、`FIN_DATA_DIR`、protected sibling、overlap 与 symlink roots。
+Runtime data defaults to ignored `backend/data/`. Tests and local validation must use a temporary or task-specific `FIN_DATA_DIR` and must not write fixtures into runtime data.
 
-真实密钥只放在 ignored `backend/.env`。不要把 endpoint、key、用户数据、原始 provider payload 或私有 Report Overview 写入日志、fixture 或文档。
+Do not put credentials, provider endpoints, raw provider payloads, private Report Overviews, local filesystem paths, or user runtime data into source, tests, logs, issues, or documentation. For security reports, see [`SECURITY.md`](SECURITY.md).
 
-## 许可证与来源
+The project is not an automated trading system. Portfolio and Decision surfaces are research aids and do not place orders.
 
-本项目采用 [MIT License](LICENSE)，由 LuNa-shi 维护。经授权基于 Kenzeq/Adaptors 的代码快照独立发布；保留源码中已有的版权和第三方许可声明。
+## Documentation
+
+- [`CONTRIBUTING.md`](CONTRIBUTING.md) — contribution and verification guide
+- [`AGENTS.md`](AGENTS.md) — repository operation and data-safety rules
+- [`documents/current-agent-io.md`](documents/current-agent-io.md) — current Agent, Report, Worldview, and Claim boundaries
+- [`documents/generated/`](documents/generated/) — source-generated workflow and authority projections
+- [`documents/standards/benchmark-and-reviewer-gates.md`](documents/standards/benchmark-and-reviewer-gates.md) — benchmark and reviewer-gate standard
+- [`documents/架构设计/README.md`](documents/架构设计/README.md) — architecture reference index
+
+## Contributing
+
+Bug reports, focused improvements, documentation fixes, and reproducible test cases are welcome. Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) before opening a pull request.
+
+## License and attribution
+
+Fin Agent is released under the [MIT License](LICENSE). The repository was independently published from an authorized code snapshot based on Kenzeq/Adaptors; existing copyright and third-party license notices remain in the source tree.
