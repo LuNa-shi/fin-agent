@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finagent.local/schemas/research/data-orchestrator.output.v1.schema.json",
+  "title": "Data Orchestrator Output v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "asOf", "producer", "contractVersion", "inputDigest", "createdAt", "evidenceRefs", "organized", "sourceQuality", "contradictions", "gaps", "nextDataFocus", "competitorDossier"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "asOf": { "type": "string", "format": "date-time" },
+    "producer": { "const": "data-orchestrator" },
+    "contractVersion": { "type": "string" },
+    "inputDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "evidenceRefs": { "type": "array", "items": { "type": "string" } },
+    "organized": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["dimension", "points"],
+        "properties": {
+          "dimension": { "type": "string" },
+          "points": { "type": "array", "items": { "type": "object" } }
+        }
+      }
+    },
+    "sourceQuality": { "type": "array", "items": { "type": "object" } },
+    "contradictions": { "type": "array", "items": { "type": "object" } },
+    "gaps": { "type": "array", "items": { "type": "string" } },
+    "nextDataFocus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["questions", "tickers", "tools"],
+      "properties": {
+        "questions": { "type": "array", "items": { "type": "string" } },
+        "tickers": { "type": "array", "items": { "type": "string" } },
+        "tools": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "competitorDossier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["competitors", "items"],
+      "properties": {
+        "competitors": { "type": "array", "items": { "type": "string" } },
+        "items": { "type": "array", "items": { "type": "object" } }
+      }
+    }
+  }
+}

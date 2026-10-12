@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finagent.local/schemas/ideas/ideaArtifact.v1.schema.json",
+  "title": "IdeaArtifact v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["ideas"],
+  "properties": {
+    "ideas": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["title", "theme", "heat", "rationale", "tickers", "catalyst", "edge", "titleZh", "rationaleZh", "catalystZh", "edgeZh"],
+        "properties": {
+          "title": { "type": "string", "minLength": 1 },
+          "theme": { "type": "string", "minLength": 1 },
+          "heat": { "type": "number", "minimum": 0, "maximum": 100 },
+          "rationale": { "type": "string", "minLength": 1 },
+          "tickers": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "catalyst": { "type": "string", "minLength": 1 },
+          "edge": { "type": "string", "minLength": 1 },
+          "titleZh": { "type": "string", "minLength": 1 },
+          "rationaleZh": { "type": "string", "minLength": 1 },
+          "catalystZh": { "type": "string", "minLength": 1 },
+          "edgeZh": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

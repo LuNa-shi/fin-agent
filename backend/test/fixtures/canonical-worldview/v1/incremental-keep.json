@@ -1,0 +1,10 @@
+{
+  "contract": "worldview-agent-result.v1",
+  "worldview": {
+    "action": "KEEP",
+    "baseWorldviewVersionId": "worldview_v_fixture",
+    "rationale": "Scripted evidence does not change core causal understanding.",
+    "package": null
+  },
+  "claimActions": []
+}

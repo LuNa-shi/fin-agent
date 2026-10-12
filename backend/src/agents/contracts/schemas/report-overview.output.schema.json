@@ -1,0 +1,99 @@
+{
+  "$id": "report-overview.output.v1",
+  "type": "object",
+  "required": [
+    "overview"
+  ],
+  "properties": {
+    "overview": {
+      "type": "object",
+      "required": [
+        "reportVersionId",
+        "contentDigest",
+        "summary",
+        "keyThemes",
+        "entities",
+        "materialDevelopments",
+        "uncertainties"
+      ],
+      "properties": {
+        "reportVersionId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "contentDigest": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "keyThemes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "maxItems": 32
+        },
+        "entities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "type",
+              "tickers"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "type": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80
+              },
+              "tickers": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 32
+                },
+                "maxItems": 32
+              }
+            },
+            "additionalProperties": false
+          },
+          "maxItems": 64
+        },
+        "materialDevelopments": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "maxItems": 32
+        },
+        "uncertainties": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "maxItems": 32
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

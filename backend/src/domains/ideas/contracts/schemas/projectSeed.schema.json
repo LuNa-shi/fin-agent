@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finagent.local/schemas/ideas/projectSeed.v1.schema.json",
+  "title": "ProjectSeed v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["title", "theme", "industryTemplate", "companyTemplate", "rationale", "tickers", "titleZh"],
+  "properties": {
+    "title": { "type": "string", "minLength": 1 },
+    "theme": { "type": "string", "minLength": 1 },
+    "industryTemplate": { "type": "string", "minLength": 1 },
+    "companyTemplate": { "type": "string", "minLength": 1 },
+    "rationale": { "type": "string", "minLength": 1 },
+    "tickers": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+    "titleZh": { "type": "string", "minLength": 1 }
+  }
+}

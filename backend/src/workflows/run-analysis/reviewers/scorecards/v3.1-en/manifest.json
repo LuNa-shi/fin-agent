@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "scorecard-manifest.v1",
+  "version": "v3.1-en",
+  "evaluationStage": "final_integrated",
+  "approvalReference": "G2 revision 2 approved by the user on 2026-07-28 for repository inclusion/use and hash-identical canonical runtime copies; no ownership, license, relicensing, or repository-external distribution right is asserted",
+  "scorecards": [
+    {
+      "id": "data",
+      "version": "v3.1-en",
+      "canonicalPath": "investment-research-data-scorecard-en.md",
+      "sourceFilename": "investment-research-data-scorecard-en.md",
+      "contentDigest": "sha256:05435fd515416da39c8ac3bfc7069192c2ff286bab89e617c8f09496a8864778",
+      "evaluationStage": "final_integrated",
+      "approvalReference": "G2 revision 2 approved by the user on 2026-07-28"
+    },
+    {
+      "id": "industry",
+      "version": "v3.1-en",
+      "canonicalPath": "investment-research-industry-scorecard-en.md",
+      "sourceFilename": "investment-research-industry-scorecard-en.md",
+      "contentDigest": "sha256:943c2390f9876ce48727f618dca0e98b26b32a6b1e2153237ab91b6fae120d17",
+      "evaluationStage": "final_integrated",
+      "approvalReference": "G2 revision 2 approved by the user on 2026-07-28"
+    },
+    {
+      "id": "company",
+      "version": "v3.1-en",
+      "canonicalPath": "investment-research-company-scorecard-en.md",
+      "sourceFilename": "investment-research-company-scorecard-en.md",
+      "contentDigest": "sha256:415f3bfd59d8267c23e1a5c5bf3579bd5b797411114d6f5ece120c0163173aa6",
+      "evaluationStage": "final_integrated",
+      "approvalReference": "G2 revision 2 approved by the user on 2026-07-28"
+    }
+  ]
+}

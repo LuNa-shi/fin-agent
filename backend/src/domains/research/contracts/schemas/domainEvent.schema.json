@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finagent.local/schemas/research/domainEvent.v1.schema.json",
+  "title": "DomainEvent v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "eventId", "eventType", "entityIds", "publishedAt", "observedAt", "evidenceRefs", "summary", "significance", "status", "relatedEventIds"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "eventId": { "type": "string", "pattern": "^event:[a-f0-9]{64}$" },
+    "eventType": { "type": "string", "minLength": 1 },
+    "entityIds": { "type": "array", "items": { "type": "string" } },
+    "occurredAt": { "type": "string", "format": "date-time" },
+    "announcedAt": { "type": "string", "format": "date-time" },
+    "publishedAt": { "type": "string", "format": "date-time" },
+    "observedAt": { "type": "string", "format": "date-time" },
+    "evidenceRefs": { "type": "array", "items": { "type": "string" } },
+    "summary": { "type": "string", "minLength": 1 },
+    "significance": { "type": "string", "enum": ["low", "medium", "high"] },
+    "status": { "type": "string", "enum": ["reported", "confirmed", "revised", "cancelled"] },
+    "relatedEventIds": { "type": "array", "items": { "type": "string" } }
+  }
+}

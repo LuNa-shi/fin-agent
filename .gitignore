@@ -1,0 +1,23 @@
+# 密钥与运行期数据一律不入库（密钥只放 backend/.env，模板见 backend/.env.example）
+backend/.env
+backend/data/
+backend/server.log
+*.log
+node_modules/
+frontend/dist/
+.DS_Store
+
+# 所有任务 worktree 统一放在稳定主目录下，仅作为本地工作区，不入库。
+/.worktrees/
+
+# docs 根目录入口文件可继续跟踪；所有一级子目录中的具体内容仅在本地保留。
+# 已经被 Git 跟踪的历史文件不会因 ignore 自动移出索引，需另行明确授权处理。
+/docs/*/**
+docs/plans/.active_plan
+.planning/
+
+# 日常 Reviewer Gate 原始输出只在本地保留；正式结论见 artifacts/gates/
+artifacts/local/
+
+# 本地归档文件不入库；文档目录只同步可直接查看的源文件与转换结果
+documents/*.zip

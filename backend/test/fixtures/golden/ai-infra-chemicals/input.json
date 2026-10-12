@@ -1,0 +1,7 @@
+{
+  "asOf": "2026-07-12T00:00:00.000Z",
+  "theme": "AI infrastructure chemical-material bottlenecks",
+  "rationale": "Identify where AI data-center capex creates scarce chemical and material capacity, then distinguish direct beneficiaries from weak proxies.",
+  "tickers": ["ENTG"],
+  "researchBrief": "Map capex to wafer starts to materials demand, quantify bottlenecks and lags, compare listed proxies, valuation, catalysts, and invalidation."
+}

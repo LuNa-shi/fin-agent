@@ -1,0 +1,467 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finagent.local/schemas/research/scorecard-evaluation.v1.schema.json",
+  "title": "Scorecard Evaluation v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "asOf",
+    "producer",
+    "contractVersion",
+    "inputDigest",
+    "createdAt",
+    "evidenceRefs",
+    "lens",
+    "rubricVersion",
+    "candidateIdentity",
+    "dependencyIdentity",
+    "cycle",
+    "artifactsScored",
+    "rawSourceChecks",
+    "units",
+    "aggregation"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "asOf": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "producer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "contractVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "inputDigest": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "evidenceRefs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "lens": {
+      "enum": [
+        "data",
+        "industry",
+        "company"
+      ]
+    },
+    "rubricVersion": {
+      "const": "v3.1-en"
+    },
+    "candidateIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidateRef",
+        "candidateDigest"
+      ],
+      "properties": {
+        "candidateRef": {
+          "type": "object"
+        },
+        "candidateDigest": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        }
+      }
+    },
+    "dependencyIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dependencyRefs",
+        "dependencyDigest"
+      ],
+      "properties": {
+        "dependencyRefs": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "data",
+            "industry",
+            "company"
+          ],
+          "properties": {
+            "data": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object"
+              }
+            },
+            "industry": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object"
+              }
+            },
+            "company": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "dependencyDigest": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        }
+      }
+    },
+    "cycle": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2
+    },
+    "artifactsScored": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "rawSourceChecks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "checkId",
+          "artifactRef",
+          "location",
+          "status",
+          "evidenceRefs",
+          "notes"
+        ],
+        "properties": {
+          "checkId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "artifactRef": {
+            "type": "string",
+            "minLength": 1
+          },
+          "location": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "supported",
+              "contradicted",
+              "inconclusive",
+              "not-checked"
+            ]
+          },
+          "evidenceRefs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "units": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "unitId",
+          "unitKind",
+          "unitStatus",
+          "unitClass",
+          "materialityWeightBps",
+          "rubricResults",
+          "applicableWeightPoints",
+          "notApplicableWeightPoints",
+          "rawScoreBps",
+          "appliedCaps",
+          "finalScoreBps",
+          "qualityBand",
+          "displayResult"
+        ],
+        "properties": {
+          "unitId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "unitKind": {
+            "enum": [
+              "project",
+              "industry",
+              "ticker"
+            ]
+          },
+          "unitStatus": {
+            "enum": [
+              "scored",
+              "missing"
+            ]
+          },
+          "unitClass": {
+            "enum": [
+              "project",
+              "material",
+              "emerging_material",
+              "ticker"
+            ]
+          },
+          "materialityWeightBps": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10000
+          },
+          "rubricResults": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "rubricId",
+                "weight",
+                "status",
+                "weightedScoreBps",
+                "decisiveEvidence",
+                "whyNotHigher",
+                "errorTags",
+                "confidence"
+              ],
+              "properties": {
+                "rubricId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "weight": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 100
+                },
+                "status": {
+                  "enum": [
+                    "scored",
+                    "not-applicable"
+                  ]
+                },
+                "rating": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 4
+                },
+                "notApplicableReason": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "weightedScoreBps": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 10000
+                },
+                "decisiveEvidence": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "whyNotHigher": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "errorTags": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "confidence": {
+                  "enum": [
+                    "high",
+                    "medium",
+                    "low"
+                  ]
+                }
+              }
+            }
+          },
+          "applicableWeightPoints": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "notApplicableWeightPoints": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "rawScoreBps": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10000
+          },
+          "appliedCaps": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "capId",
+                "maximumScoreBps",
+                "condition"
+              ],
+              "properties": {
+                "capId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "maximumScoreBps": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 10000
+                },
+                "condition": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          "finalScoreBps": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10000
+          },
+          "qualityBand": {
+            "enum": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "F"
+            ]
+          },
+          "displayResult": {
+            "enum": [
+              "pass",
+              "fail"
+            ]
+          }
+        }
+      }
+    },
+    "aggregation": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "method",
+            "weightsAuditable",
+            "missingMaterialityWeightBps",
+            "rawScoreBps",
+            "appliedCaps",
+            "finalScoreBps",
+            "qualityBand",
+            "displayResult"
+          ],
+          "properties": {
+            "method": {
+              "const": "materiality-weighted"
+            },
+            "weightsAuditable": {
+              "type": "boolean"
+            },
+            "missingMaterialityWeightBps": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10000
+            },
+            "rawScoreBps": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10000
+            },
+            "appliedCaps": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "capId",
+                  "maximumScoreBps",
+                  "condition"
+                ],
+                "properties": {
+                  "capId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "maximumScoreBps": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 10000
+                  },
+                  "condition": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            },
+            "finalScoreBps": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10000
+            },
+            "qualityBand": {
+              "enum": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "F"
+              ]
+            },
+            "displayResult": {
+              "enum": [
+                "pass",
+                "fail"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

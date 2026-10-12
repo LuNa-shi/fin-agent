@@ -1,0 +1,31 @@
+{
+  "name": "fin-agent-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "archive:runtime": "node scripts/archiveRuntimeData.mjs",
+    "reset:worldview-claim-authorities": "node scripts/resetWorldviewClaimAuthorities.mjs",
+    "test": "node --test test/*.test.mjs",
+    "smoke:demo": "DEMO_MODE=true AUTO_RESUME=false node scripts/smokeDemoE2E.mjs",
+    "gate:daily100": "node scripts/runDaily100ReportGate.mjs",
+    "schedule:daily100": "node scripts/runScheduledDailyReportGate.mjs",
+    "lint": "eslint .",
+    "hooks:install": "git config core.hooksPath .githooks",
+    "check:openai-compatible:live": "node scripts/checkOpenAICompatible.mjs --live"
+  },
+  "dependencies": {
+    "@earendil-works/pi-agent-core": "0.80.6",
+    "@earendil-works/pi-ai": "0.80.6",
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.6.0"
+  }
+}

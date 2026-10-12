@@ -1,0 +1,468 @@
+{
+  "schemaVersion": "workflow-w8-fixture.v1",
+  "fixtureId": "workflow-w8-production-composition-v1",
+  "description": "Deterministic current-model W8 acceptance fixture built on the M1 production-composition inputs.",
+  "run": {
+    "runId": "idea_run_workflow_w8_v1",
+    "asOf": "2026-07-23T18:00:00.000Z",
+    "requestedCount": 2,
+    "stopAfterNodeId": "review-quality"
+  },
+  "expectedBaselines": {
+    "agentCount": 20,
+    "toolCount": 79,
+    "ideaGenerationWorkflowId": "idea-generation.v2",
+    "ideaGenerationWorkflowVersion": "2.0.0",
+    "ideaGenerationWorkflowHash": "sha256:087c7781a753b1c5f936993ed1d9d91771fe89fc6bac1411a886aa950630f1eb",
+    "ideaScopeId": "idea-universe:local-user",
+    "runAnalysisWorkflowHash": "sha256:12580210704a77827a353d260223e00f38b71fe9e92ff630eb570212a125c709",
+    "generatorPoolTarget": 8,
+    "heldThemes": [
+      "grid infrastructure"
+    ],
+    "heavyThemes": [
+      "grid infrastructure(1)"
+    ],
+    "validGeneratedCount": 4,
+    "rawGeneratedCount": 7,
+    "rejectionReasons": [
+      "duplicate-prior-output",
+      "missing-title",
+      "all-tickers-invalid"
+    ],
+    "validGeneratedTitles": [
+      "Grid equipment backlog reacceleration",
+      "Electrical components pricing durability",
+      "Power semiconductor inventory normalization",
+      "Data-center thermal infrastructure utilization"
+    ],
+    "selectedValidTitles": [
+      "Grid equipment backlog reacceleration",
+      "Power semiconductor inventory normalization"
+    ],
+    "unselectedValidTitles": [
+      "Electrical components pricing durability",
+      "Data-center thermal infrastructure utilization"
+    ],
+    "lowRankSelectedTitle": "Power semiconductor inventory normalization",
+    "sourceOnlyTitle": "PWR thesis can be extended into suppliers, peers, or hedges if the original grid infrastructure driver remains valid."
+  },
+  "project": {
+    "title": "Existing W8 Project",
+    "ticker": "EXST",
+    "randomValue": 0.48484848,
+    "privateSentinel": "w8-project-private-workspace-sentinel-v1"
+  },
+  "inputs": {
+    "positions": [
+      {
+        "id": "position_w8_1",
+        "ticker": "PWR",
+        "name": "Quanta Services",
+        "theme": "grid infrastructure",
+        "reason": "Captured portfolio input for deterministic W8 diversification.",
+        "weight": 0.08,
+        "rank": 1,
+        "confidence": 0.75,
+        "status": "active",
+        "addedAt": 1760000000000
+      }
+    ],
+    "mandate": {
+      "style": "balanced",
+      "minMarketCap": 1000000000,
+      "maxLeverage": 4,
+      "minCandidates": 2,
+      "maxCandidates": 20,
+      "maxHoldings": 10,
+      "convexityBonus": 0.15,
+      "horizonPref": "6-12M",
+      "allowDataGap": false,
+      "maxProjectAgeDays": 45
+    },
+    "settings": {
+      "DEFAULT_PROVIDER": "openai-compatible",
+      "DEEPSEEK_MODEL": "deepseek-v4-pro",
+      "SMALL_PROVIDER": "",
+      "SMALL_MODEL": "",
+      "MAIN_PROVIDER": "",
+      "MAIN_MODEL": "",
+      "REFLECTION_PROVIDER": "openai-compatible",
+      "REFLECTION_MODEL": "gpt-5.6-sol",
+      "UI_LANGUAGE": "zh",
+      "ANALYSIS_LANGUAGE": "en",
+      "REPORT_LANGUAGE": "en",
+      "DEMO_MODE": false,
+      "OPENAI_COMPATIBLE_MODEL": "gpt-5.6-sol",
+      "OPENAI_COMPATIBLE_REASONING_LEVEL": "high"
+    }
+  },
+  "market": {
+    "top": [
+      "Industrials"
+    ],
+    "bottom": [
+      "Utilities"
+    ],
+    "headlines": [
+      "Grid capital spending remains elevated"
+    ],
+    "sectorTable": [
+      "Industrials +1.2%"
+    ],
+    "research": [],
+    "saIdeas": [],
+    "sourcesUsed": [
+      "w8-fixture-market"
+    ],
+    "domainsUsed": [
+      "power-infrastructure"
+    ],
+    "hasData": true,
+    "demoMode": false
+  },
+  "tickerVerification": {
+    "valid": [
+      "GEV",
+      "ETN",
+      "ON",
+      "VRT",
+      "PWR"
+    ]
+  },
+  "generator": {
+    "ideas": [
+      {
+        "title": "Grid equipment backlog reacceleration",
+        "theme": "grid equipment",
+        "heat": 93,
+        "rationale": "Multi-year utility orders can extend the backlog conversion runway.",
+        "tickers": [
+          "GEV"
+        ],
+        "catalyst": "Backlog conversion",
+        "edge": "Consensus may understate duration."
+      },
+      {
+        "title": "  GRID equipment backlog reacceleration  ",
+        "theme": "grid equipment",
+        "heat": 88,
+        "rationale": "This deliberately duplicates the first normalized title.",
+        "tickers": [
+          "GEV"
+        ],
+        "catalyst": "Duplicate",
+        "edge": "Duplicate"
+      },
+      {
+        "theme": "malformed",
+        "heat": 70,
+        "rationale": "This output deliberately omits a title.",
+        "tickers": [
+          "ETN"
+        ]
+      },
+      {
+        "title": "Electrical components pricing durability",
+        "theme": "electrical components",
+        "heat": 81,
+        "rationale": "Mix and capacity constraints can support pricing longer than expected.",
+        "tickers": [
+          "ETN"
+        ],
+        "catalyst": "Capacity expansion",
+        "edge": "Pricing durability is under-modeled."
+      },
+      {
+        "title": "Power semiconductor inventory normalization",
+        "theme": "power semiconductors",
+        "heat": 67,
+        "rationale": "Channel normalization can reveal an earnings trough.",
+        "tickers": [
+          "ON"
+        ],
+        "catalyst": "Inventory normalization",
+        "edge": "The trough may arrive before consensus."
+      },
+      {
+        "title": "Unverifiable ticker output",
+        "theme": "invalid ticker",
+        "heat": 62,
+        "rationale": "This candidate deliberately contains only an invalid ticker.",
+        "tickers": [
+          "ZZZINVALID"
+        ],
+        "catalyst": "None",
+        "edge": "None"
+      },
+      {
+        "title": "Data-center thermal infrastructure utilization",
+        "theme": "data-center infrastructure",
+        "heat": 59,
+        "rationale": "Higher rack density can tighten thermal infrastructure utilization.",
+        "tickers": [
+          "VRT"
+        ],
+        "catalyst": "Rack-density deployments",
+        "edge": "Thermal content growth may be underestimated."
+      }
+    ]
+  },
+  "reviewer": {
+    "selected": [
+      {
+        "index": 0,
+        "score": 96,
+        "reason": "Highest-conviction backlog and catalyst combination."
+      },
+      {
+        "index": 2,
+        "score": 41,
+        "reason": "Lower-ranked but still structurally valid candidate."
+      }
+    ]
+  },
+  "w8": {
+    "mutableInputs": {
+      "positions": [
+        {
+          "id": "position_w8_1",
+          "ticker": "PWR",
+          "name": "Quanta Services",
+          "theme": "grid infrastructure",
+          "reason": "Captured portfolio input for deterministic W8 diversification.",
+          "weight": 0.08,
+          "rank": 1,
+          "confidence": 0.75,
+          "status": "active",
+          "addedAt": 1760000000000
+        }
+      ],
+      "mandate": {
+        "style": "balanced",
+        "minMarketCap": 1000000000,
+        "maxLeverage": 4,
+        "minCandidates": 2,
+        "maxCandidates": 20,
+        "maxHoldings": 10,
+        "convexityBonus": 0.15,
+        "horizonPref": "6-12M",
+        "allowDataGap": false,
+        "maxProjectAgeDays": 45
+      }
+    },
+    "projects": {
+      "success": {
+        "sourceIdeaTitle": "Grid equipment backlog reacceleration",
+        "ticker": "GEV",
+        "randomValue": 0.18181818,
+        "createdAt": 1784801400000,
+        "intensity": "quick",
+        "analysisAsOf": "2026-07-23T18:20:00.000Z",
+        "analysisRunIdSuffix": "workflow-w8-success-v1"
+      },
+      "review": {
+        "sourceIdeaTitle": "Power semiconductor inventory normalization",
+        "ticker": "ON",
+        "randomValue": 0.27272727,
+        "createdAt": 1784802600000,
+        "intensity": "quick",
+        "analysisAsOf": "2026-07-23T18:40:00.000Z",
+        "analysisRunIdSuffix": "workflow-w8-review-v1"
+      },
+      "legacy": {
+        "idea": {
+          "id": "idea_legacy_workflow_w8_v1",
+          "title": "Legacy industrial automation cycle",
+          "theme": "industrial automation",
+          "rationale": "A legacy read-only Idea remains usable without invented run or snapshot lineage.",
+          "tickers": [
+            "ROK"
+          ],
+          "status": "new",
+          "createdAt": 1784826000000
+        },
+        "randomValue": 0.36363636,
+        "createdAt": 1784803800000,
+        "intensity": "quick"
+      }
+    },
+    "analysisFrozenData": {
+      "quotes": [
+        {
+          "symbol": "GEV",
+          "price": 612.5,
+          "changesPercentage": 1.1,
+          "timestamp": 1784830800
+        },
+        {
+          "symbol": "ON",
+          "price": 67.8,
+          "changesPercentage": -0.4,
+          "timestamp": 1784830800
+        }
+      ],
+      "fundamentals": {
+        "GEV": {
+          "pe": 38,
+          "ps": 5.2,
+          "grossMargin": 0.28,
+          "netMargin": 0.11,
+          "roe": 0.19,
+          "revenueGrowth": 0.16,
+          "epsGrowth": 0.22,
+          "fwdPE1": 31,
+          "fwdPE2": 27,
+          "fwdPS1": 4.7,
+          "fwdPEG": 1.4,
+          "estRevGrowthFwd": 15,
+          "estEpsGrowthFwd": 22,
+          "analystTarget": 650,
+          "dcfValue": 570,
+          "sector": "Industrials",
+          "industry": "Specialty Industrial Machinery",
+          "nextEarnings": {
+            "date": "2026-07-29",
+            "epsEst": 6.1
+          }
+        },
+        "ON": {
+          "pe": 19,
+          "ps": 3.1,
+          "grossMargin": 0.45,
+          "netMargin": 0.17,
+          "roe": 0.18,
+          "revenueGrowth": -0.04,
+          "epsGrowth": -0.08,
+          "fwdPE1": 17,
+          "fwdPE2": 14,
+          "fwdPS1": 2.8,
+          "fwdPEG": 1.1,
+          "estRevGrowthFwd": 8,
+          "estEpsGrowthFwd": 15,
+          "analystTarget": 78,
+          "dcfValue": 63,
+          "sector": "Technology",
+          "industry": "Semiconductors",
+          "nextEarnings": {
+            "date": "2026-08-03",
+            "epsEst": 1.05
+          }
+        }
+      },
+      "transcripts": [],
+      "research": {
+        "finance": {
+          "answer": "The frozen scenario preserves the selected company's fixed price, growth, margin, and valuation fields at the declared as-of.",
+          "citations": [
+            "w8-frozen://finance"
+          ]
+        },
+        "competitive": {
+          "answer": "The selected company is evaluated only against the bounded structural drivers recorded in this fixture.",
+          "citations": [
+            "w8-frozen://competitive"
+          ]
+        },
+        "drivers": {
+          "answer": "Backlog conversion, pricing, inventory days, and gross margin are the bounded variables in this structural fixture.",
+          "sources": [
+            "w8-frozen://drivers"
+          ],
+          "required": true
+        },
+        "news": [],
+        "opinions": []
+      },
+      "industry": {
+        "sectors": [
+          "Industrials +1.2%",
+          "Technology -0.3%"
+        ],
+        "peers": [
+          "ETN",
+          "VRT"
+        ],
+        "comps": [
+          {
+            "ticker": "GEV",
+            "isTarget": true,
+            "pe": 38,
+            "fwdPE1": 31,
+            "ps": 5.2,
+            "fwdPEG": 1.4,
+            "grossMargin": 0.28,
+            "roe": 0.19,
+            "revenueGrowth": 0.16
+          },
+          {
+            "ticker": "ON",
+            "isTarget": true,
+            "pe": 19,
+            "fwdPE1": 17,
+            "ps": 3.1,
+            "fwdPEG": 1.1,
+            "grossMargin": 0.45,
+            "roe": 0.18,
+            "revenueGrowth": -0.04
+          },
+          {
+            "ticker": "ETN",
+            "pe": 32,
+            "fwdPE1": 27,
+            "ps": 5.8,
+            "fwdPEG": 1.6,
+            "grossMargin": 0.38,
+            "roe": 0.21,
+            "revenueGrowth": 0.1
+          }
+        ]
+      },
+      "detail": {
+        "GEV": {
+          "gradeBias": "positive",
+          "topHolders": [
+            "Long-only industrial funds"
+          ],
+          "revenueSegments": {
+            "Power": 18000000000,
+            "Electrification": 7500000000
+          },
+          "piotroski": 7,
+          "altmanZ": 4.9,
+          "sec": {
+            "events": "Frozen W8 scenario record; no post-as-of evidence is included.",
+            "latestReport": "2026 Q2 filing",
+            "riskExcerpt": "Execution capacity and component availability can delay backlog conversion."
+          }
+        },
+        "ON": {
+          "gradeBias": "neutral",
+          "topHolders": [
+            "Diversified technology funds"
+          ],
+          "revenueSegments": {
+            "Power Solutions": 3700000000,
+            "Analog and Mixed Signal": 2100000000
+          },
+          "piotroski": 6,
+          "altmanZ": 5.2,
+          "sec": {
+            "events": "Frozen W8 scenario record; no post-as-of evidence is included.",
+            "latestReport": "2026 Q2 filing",
+            "riskExcerpt": "Inventory correction duration and automotive demand can pressure utilization."
+          }
+        }
+      },
+      "highFreq": []
+    },
+    "humanReview": {
+      "selectedAction": "report-only-revision",
+      "globalComment": "Revise only the report and reviewer subgraph using the accepted deterministic issue disposition.",
+      "issueComment": "Correct the report-level evidence statement and re-enter the normal review gate."
+    },
+    "crash": {
+      "agentId": "report-composer"
+    }
+  }
+}

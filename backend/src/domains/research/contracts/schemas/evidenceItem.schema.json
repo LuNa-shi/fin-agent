@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finagent.local/schemas/research/evidenceItem.v1.schema.json",
+  "title": "EvidenceItem v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "evidenceId", "sourceId", "entityIds", "statement", "publishedAt", "observedAt", "locator", "evidenceType", "confidence", "supersedes", "contradicts"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "evidenceId": { "type": "string", "pattern": "^evidence:[a-f0-9]{64}$" },
+    "sourceId": { "type": "string", "pattern": "^source:[a-f0-9]{64}$" },
+    "entityIds": { "type": "array", "items": { "type": "string" } },
+    "statement": { "type": "string", "minLength": 1 },
+    "value": {},
+    "unit": { "type": "string" },
+    "period": { "type": "string" },
+    "publishedAt": { "type": "string", "format": "date-time" },
+    "observedAt": { "type": "string", "format": "date-time" },
+    "validFrom": { "type": "string", "format": "date-time" },
+    "validTo": { "type": "string", "format": "date-time" },
+    "locator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["section", "quoteHash"],
+      "properties": {
+        "page": { "type": "integer", "minimum": 1 },
+        "section": { "type": "string", "minLength": 1 },
+        "quoteHash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+      }
+    },
+    "evidenceType": { "type": "string", "enum": ["fact", "management_statement", "estimate", "opinion"] },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "supersedes": { "type": "array", "items": { "type": "string" } },
+    "contradicts": { "type": "array", "items": { "type": "string" } }
+  }
+}

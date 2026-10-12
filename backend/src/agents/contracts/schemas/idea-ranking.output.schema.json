@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finagent.local/schemas/agents/idea-ranking.output.v1.schema.json",
+  "title": "Idea Ranking Output v1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["rankings"],
+  "properties": {
+    "rankings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["title", "theme", "tickers", "catalyst", "edge", "conviction", "valuation", "timeliness", "uniqueness", "overall", "note"],
+        "properties": {
+          "title": { "type": "string" },
+          "theme": { "type": "string" },
+          "tickers": {},
+          "catalyst": { "type": "number", "minimum": 0, "maximum": 100 },
+          "edge": { "type": "number", "minimum": 0, "maximum": 100 },
+          "conviction": { "type": "number", "minimum": 0, "maximum": 100 },
+          "valuation": { "type": "number", "minimum": 0, "maximum": 100 },
+          "timeliness": { "type": "number", "minimum": 0, "maximum": 100 },
+          "uniqueness": { "type": "number", "minimum": 0, "maximum": 100 },
+          "overall": { "type": "number", "minimum": 0, "maximum": 100 },
+          "note": { "type": "string" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finagent.local/schemas/research/draftReportPackage.v1.schema.json",
+  "title": "DraftReportPackage v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "asOf", "producer", "contractVersion", "inputDigest", "createdAt", "evidenceRefs", "reportArtifact", "claimInventory", "driverBridge", "openIssues"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" }, "asOf": { "type": "string", "format": "date-time" }, "producer": { "type": "string" }, "contractVersion": { "type": "string" }, "inputDigest": { "type": "string" }, "createdAt": { "type": "string", "format": "date-time" }, "evidenceRefs": { "type": "array", "items": { "type": "string" } },
+    "reportArtifact": { "type": "object", "required": ["path", "mediaType"], "properties": { "path": { "type": "string" }, "mediaType": { "const": "text/markdown" } }, "additionalProperties": false },
+    "claimInventory": { "type": "array", "items": { "type": "object" } }, "driverBridge": { "type": "array", "items": { "type": "object" } }, "openIssues": { "type": "array", "items": { "type": "object" } }
+  }
+}

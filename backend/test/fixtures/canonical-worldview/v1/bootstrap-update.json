@@ -1,0 +1,66 @@
+{
+  "contract": "worldview-agent-result.v1",
+  "worldview": {
+    "action": "UPDATE",
+    "baseWorldviewVersionId": null,
+    "rationale": "Scripted bootstrap creates the complete initial Worldview.",
+    "package": {
+      "title": "Scripted Canonical Worldview",
+      "asOf": "2026-08-20T00:00:00.000Z",
+      "narrativeMarkdown": "# Scripted Canonical Worldview\n\nA deterministic fixture package.\n",
+      "causalRelationships": [
+        {
+          "relationshipId": "fixture-causal-link",
+          "cause": "Fixture demand",
+          "effect": "Fixture capacity",
+          "mechanism": "Fixture demand changes fixture capacity.",
+          "confidence": "medium",
+          "evidence": [
+            {
+              "reportVersionId": "report_fixture",
+              "contentDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          ],
+          "counterEvidence": []
+        }
+      ],
+      "evidence": [
+        {
+          "reportVersionId": "report_fixture",
+          "contentDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "kind": "supporting",
+          "summary": "Fixture supporting evidence."
+        }
+      ],
+      "counterEvidence": [],
+      "investmentImplications": [
+        {
+          "theme": "Fixture",
+          "implication": "Validate deterministic mechanics.",
+          "horizon": "12 months",
+          "confidence": "medium"
+        }
+      ],
+      "coverage": {
+        "overviewIds": [
+          "overview_fixture"
+        ],
+        "reportVersionIds": [
+          "report_fixture"
+        ],
+        "selectedFullReadReportVersionIds": [
+          "report_fixture"
+        ]
+      },
+      "updateSummary": {
+        "retained": [],
+        "changed": [],
+        "added": [
+          "Fixture causal link"
+        ],
+        "removed": []
+      }
+    }
+  },
+  "claimActions": []
+}

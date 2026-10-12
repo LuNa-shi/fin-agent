@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finagent.local/schemas/ideas/ideaReview.v1.schema.json",
+  "title": "IdeaReview v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["selected"],
+  "properties": {
+    "selected": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["index", "score", "reason"],
+        "properties": {
+          "index": { "type": "integer", "minimum": 0 },
+          "score": { "type": "number", "minimum": 0, "maximum": 100 },
+          "reason": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

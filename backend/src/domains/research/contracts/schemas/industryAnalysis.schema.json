@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finagent.local/schemas/research/industryAnalysis.v1.schema.json",
+  "title": "IndustryAnalysis v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "asOf", "producer", "contractVersion", "inputDigest", "createdAt", "evidenceRefs",
+    "structuralView", "industryDrivers", "valueChain", "peerEconomics", "consensusView", "variantView", "risks", "openQuestions",
+    "marketSize", "industryMainline", "keyExternalDrivers", "demandSupplyMap", "drivers", "competition",
+    "valuationExpectationMatrix", "evidenceGaps", "surprises", "segments"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "asOf": { "type": "string", "format": "date-time" },
+    "producer": { "const": "industry-analyst" },
+    "contractVersion": { "type": "string" },
+    "inputDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "evidenceRefs": { "type": "array", "items": { "type": "string" } },
+    "structuralView": { "type": "string", "minLength": 1 },
+    "industryDrivers": { "type": "array", "items": { "type": "object" } },
+    "valueChain": { "type": "object" },
+    "peerEconomics": { "type": "object" },
+    "consensusView": { "type": "string" },
+    "variantView": { "type": "string" },
+    "risks": { "type": "array" },
+    "openQuestions": { "type": "array", "items": { "type": "string" } },
+    "marketSize": { "type": "string" },
+    "industryMainline": { "type": "string" },
+    "keyExternalDrivers": { "type": "string" },
+    "demandSupplyMap": {},
+    "drivers": { "type": "array" },
+    "competition": {},
+    "crossIndustry": {},
+    "valuationExpectationMatrix": {},
+    "evidenceGaps": { "type": "array", "items": { "type": "string" } },
+    "inflection": {},
+    "surprises": { "type": "array" },
+    "variantPerception": { "type": "string" },
+    "segments": { "type": "array" }
+  }
+}

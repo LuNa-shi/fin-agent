@@ -1,0 +1,717 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-14T00:00:00.000Z",
+  "generator": "scripts/generateWeek3ShadowEvidence.mjs",
+  "fixturePolicy": "deterministic-key-free-no-provider-payloads",
+  "caseIds": [
+    "ai-infra-chemicals",
+    "googl"
+  ],
+  "contractIds": [
+    "logic-reviewer",
+    "report-composer",
+    "requirement-reviewer"
+  ],
+  "gates": {
+    "totalRuns": 6,
+    "legacySchemaPassRate": 1,
+    "piSchemaPassRate": 1,
+    "piSchemaNotBelowLegacy": true,
+    "meanOutputShapeAgreementPct": 100,
+    "outputShapeAgreementGatePct": 95,
+    "outputShapeAgreementPassed": true,
+    "stopReasonMatchRate": 1,
+    "artifactPathMatchRate": 1,
+    "totalPermissionDenials": 0
+  },
+  "adjudications": [
+    {
+      "caseId": "ai-infra-chemicals",
+      "route": "report",
+      "converged": false,
+      "criticalIssueCount": 2,
+      "remediationCount": 2,
+      "owners": [
+        "report",
+        "report"
+      ]
+    },
+    {
+      "caseId": "googl",
+      "route": "report",
+      "converged": false,
+      "criticalIssueCount": 2,
+      "remediationCount": 2,
+      "owners": [
+        "report",
+        "report"
+      ]
+    }
+  ],
+  "runs": [
+    {
+      "caseId": "ai-infra-chemicals",
+      "runId": "ai-infra-chemicals:logic-reviewer:shadow",
+      "projectId": "ai-infra-chemicals",
+      "contractId": "logic-reviewer",
+      "contractVersion": "1.0.0",
+      "legacy": {
+        "status": "succeeded",
+        "stopReason": "final",
+        "schemaValid": true,
+        "schemaErrors": [],
+        "outputDigest": "sha256:1a9750058acf5dbc89a4057c718d7eec3c360abe76be441be9eabc1c0dccccaa",
+        "outputShape": [
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "asOf",
+          "contractVersion",
+          "createdAt",
+          "evidenceRefs",
+          "evidenceRefs[]",
+          "inputDigest",
+          "issues",
+          "issues[]",
+          "producer",
+          "reviewerType",
+          "schemaVersion",
+          "score",
+          "score",
+          "verdict"
+        ],
+        "metrics": {
+          "turns": 1,
+          "toolCalls": 2,
+          "tokens": 0,
+          "costUsd": 0
+        },
+        "eventTypes": [],
+        "toolOrder": [
+          "ws_list_files",
+          "ws_read_file"
+        ],
+        "artifactPaths": [
+          "analysis/reviews/logic_r1.json"
+        ],
+        "permissionDenials": [],
+        "review": {
+          "reviewerType": "logic",
+          "verdict": "pass",
+          "issueCount": 0,
+          "criticalIssueCount": 0,
+          "issueOwners": []
+        }
+      },
+      "pi": {
+        "status": "succeeded",
+        "stopReason": "final",
+        "schemaValid": true,
+        "schemaErrors": [],
+        "outputDigest": "sha256:1a9750058acf5dbc89a4057c718d7eec3c360abe76be441be9eabc1c0dccccaa",
+        "outputShape": [
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "asOf",
+          "contractVersion",
+          "createdAt",
+          "evidenceRefs",
+          "evidenceRefs[]",
+          "inputDigest",
+          "issues",
+          "issues[]",
+          "producer",
+          "reviewerType",
+          "schemaVersion",
+          "score",
+          "score",
+          "verdict"
+        ],
+        "metrics": {
+          "turns": 1,
+          "toolCalls": 0,
+          "tokens": 100,
+          "costUsd": 0
+        },
+        "eventTypes": [
+          "agent.started",
+          "tool.started",
+          "tool.started",
+          "tool.completed",
+          "tool.completed",
+          "agent.turn.completed",
+          "agent.stopped"
+        ],
+        "toolOrder": [
+          "ws_list_files",
+          "ws_read_file"
+        ],
+        "artifactPaths": [
+          "analysis/reviews/logic_r1.json"
+        ],
+        "permissionDenials": [],
+        "review": {
+          "reviewerType": "logic",
+          "verdict": "pass",
+          "issueCount": 0,
+          "criticalIssueCount": 0,
+          "issueOwners": []
+        }
+      },
+      "diff": {
+        "outputDigestMatch": true,
+        "outputShapeAgreementPct": 100,
+        "stopReasonMatch": true,
+        "toolOrderMatch": true,
+        "artifactPathsMatch": true
+      }
+    },
+    {
+      "caseId": "ai-infra-chemicals",
+      "runId": "ai-infra-chemicals:report-composer:shadow",
+      "projectId": "ai-infra-chemicals",
+      "contractId": "report-composer",
+      "contractVersion": "1.0.0",
+      "legacy": {
+        "status": "succeeded",
+        "stopReason": "final",
+        "schemaValid": true,
+        "schemaErrors": [],
+        "outputDigest": "sha256:f4017a6e5cc6765089963ddd305c127ddebd8955c12d5d63d6103864972b06fd",
+        "outputShape": [
+          "$text"
+        ],
+        "metrics": {
+          "turns": 1,
+          "toolCalls": 2,
+          "tokens": 0,
+          "costUsd": 0
+        },
+        "eventTypes": [],
+        "toolOrder": [
+          "ws_list_files",
+          "ws_read_file"
+        ],
+        "artifactPaths": [
+          "report/report.md"
+        ],
+        "permissionDenials": []
+      },
+      "pi": {
+        "status": "succeeded",
+        "stopReason": "final",
+        "schemaValid": true,
+        "schemaErrors": [],
+        "outputDigest": "sha256:f4017a6e5cc6765089963ddd305c127ddebd8955c12d5d63d6103864972b06fd",
+        "outputShape": [
+          "$text"
+        ],
+        "metrics": {
+          "turns": 1,
+          "toolCalls": 0,
+          "tokens": 100,
+          "costUsd": 0
+        },
+        "eventTypes": [
+          "agent.started",
+          "tool.started",
+          "tool.started",
+          "tool.completed",
+          "tool.completed",
+          "agent.turn.completed",
+          "agent.stopped"
+        ],
+        "toolOrder": [
+          "ws_list_files",
+          "ws_read_file"
+        ],
+        "artifactPaths": [
+          "report/report.md"
+        ],
+        "permissionDenials": []
+      },
+      "diff": {
+        "outputDigestMatch": true,
+        "outputShapeAgreementPct": 100,
+        "stopReasonMatch": true,
+        "toolOrderMatch": true,
+        "artifactPathsMatch": true
+      }
+    },
+    {
+      "caseId": "ai-infra-chemicals",
+      "runId": "ai-infra-chemicals:requirement-reviewer:shadow",
+      "projectId": "ai-infra-chemicals",
+      "contractId": "requirement-reviewer",
+      "contractVersion": "1.0.0",
+      "legacy": {
+        "status": "succeeded",
+        "stopReason": "final",
+        "schemaValid": true,
+        "schemaErrors": [],
+        "outputDigest": "sha256:9572c24c68f4b5b869142eaf9db81452aec7ffd666d3ec2a9408474b5645e3ef",
+        "outputShape": [
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "asOf",
+          "contractVersion",
+          "createdAt",
+          "evidenceRefs",
+          "evidenceRefs[]",
+          "inputDigest",
+          "issues",
+          "issues[]",
+          "producer",
+          "reviewerType",
+          "schemaVersion",
+          "score",
+          "score",
+          "verdict"
+        ],
+        "metrics": {
+          "turns": 1,
+          "toolCalls": 2,
+          "tokens": 0,
+          "costUsd": 0
+        },
+        "eventTypes": [],
+        "toolOrder": [
+          "ws_list_files",
+          "ws_read_file"
+        ],
+        "artifactPaths": [
+          "analysis/reviews/requirements_r1.json"
+        ],
+        "permissionDenials": [],
+        "review": {
+          "reviewerType": "requirements",
+          "verdict": "pass",
+          "issueCount": 0,
+          "criticalIssueCount": 0,
+          "issueOwners": []
+        }
+      },
+      "pi": {
+        "status": "succeeded",
+        "stopReason": "final",
+        "schemaValid": true,
+        "schemaErrors": [],
+        "outputDigest": "sha256:9572c24c68f4b5b869142eaf9db81452aec7ffd666d3ec2a9408474b5645e3ef",
+        "outputShape": [
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "asOf",
+          "contractVersion",
+          "createdAt",
+          "evidenceRefs",
+          "evidenceRefs[]",
+          "inputDigest",
+          "issues",
+          "issues[]",
+          "producer",
+          "reviewerType",
+          "schemaVersion",
+          "score",
+          "score",
+          "verdict"
+        ],
+        "metrics": {
+          "turns": 1,
+          "toolCalls": 0,
+          "tokens": 100,
+          "costUsd": 0
+        },
+        "eventTypes": [
+          "agent.started",
+          "tool.started",
+          "tool.started",
+          "tool.completed",
+          "tool.completed",
+          "agent.turn.completed",
+          "agent.stopped"
+        ],
+        "toolOrder": [
+          "ws_list_files",
+          "ws_read_file"
+        ],
+        "artifactPaths": [
+          "analysis/reviews/requirements_r1.json"
+        ],
+        "permissionDenials": [],
+        "review": {
+          "reviewerType": "requirements",
+          "verdict": "pass",
+          "issueCount": 0,
+          "criticalIssueCount": 0,
+          "issueOwners": []
+        }
+      },
+      "diff": {
+        "outputDigestMatch": true,
+        "outputShapeAgreementPct": 100,
+        "stopReasonMatch": true,
+        "toolOrderMatch": true,
+        "artifactPathsMatch": true
+      }
+    },
+    {
+      "caseId": "googl",
+      "runId": "googl:logic-reviewer:shadow",
+      "projectId": "googl",
+      "contractId": "logic-reviewer",
+      "contractVersion": "1.0.0",
+      "legacy": {
+        "status": "succeeded",
+        "stopReason": "final",
+        "schemaValid": true,
+        "schemaErrors": [],
+        "outputDigest": "sha256:fb49c673ebc61b6df42427eb3243abc55e77de17b1a8f847c021b70a85fd5f3e",
+        "outputShape": [
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "asOf",
+          "contractVersion",
+          "createdAt",
+          "evidenceRefs",
+          "evidenceRefs[]",
+          "inputDigest",
+          "issues",
+          "issues[]",
+          "producer",
+          "reviewerType",
+          "schemaVersion",
+          "score",
+          "score",
+          "verdict"
+        ],
+        "metrics": {
+          "turns": 1,
+          "toolCalls": 2,
+          "tokens": 0,
+          "costUsd": 0
+        },
+        "eventTypes": [],
+        "toolOrder": [
+          "ws_list_files",
+          "ws_read_file"
+        ],
+        "artifactPaths": [
+          "analysis/reviews/logic_r1.json"
+        ],
+        "permissionDenials": [],
+        "review": {
+          "reviewerType": "logic",
+          "verdict": "pass",
+          "issueCount": 0,
+          "criticalIssueCount": 0,
+          "issueOwners": []
+        }
+      },
+      "pi": {
+        "status": "succeeded",
+        "stopReason": "final",
+        "schemaValid": true,
+        "schemaErrors": [],
+        "outputDigest": "sha256:fb49c673ebc61b6df42427eb3243abc55e77de17b1a8f847c021b70a85fd5f3e",
+        "outputShape": [
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "asOf",
+          "contractVersion",
+          "createdAt",
+          "evidenceRefs",
+          "evidenceRefs[]",
+          "inputDigest",
+          "issues",
+          "issues[]",
+          "producer",
+          "reviewerType",
+          "schemaVersion",
+          "score",
+          "score",
+          "verdict"
+        ],
+        "metrics": {
+          "turns": 1,
+          "toolCalls": 0,
+          "tokens": 100,
+          "costUsd": 0
+        },
+        "eventTypes": [
+          "agent.started",
+          "tool.started",
+          "tool.started",
+          "tool.completed",
+          "tool.completed",
+          "agent.turn.completed",
+          "agent.stopped"
+        ],
+        "toolOrder": [
+          "ws_list_files",
+          "ws_read_file"
+        ],
+        "artifactPaths": [
+          "analysis/reviews/logic_r1.json"
+        ],
+        "permissionDenials": [],
+        "review": {
+          "reviewerType": "logic",
+          "verdict": "pass",
+          "issueCount": 0,
+          "criticalIssueCount": 0,
+          "issueOwners": []
+        }
+      },
+      "diff": {
+        "outputDigestMatch": true,
+        "outputShapeAgreementPct": 100,
+        "stopReasonMatch": true,
+        "toolOrderMatch": true,
+        "artifactPathsMatch": true
+      }
+    },
+    {
+      "caseId": "googl",
+      "runId": "googl:report-composer:shadow",
+      "projectId": "googl",
+      "contractId": "report-composer",
+      "contractVersion": "1.0.0",
+      "legacy": {
+        "status": "succeeded",
+        "stopReason": "final",
+        "schemaValid": true,
+        "schemaErrors": [],
+        "outputDigest": "sha256:44a5eec24b33ea96f2a893f5545d6e9061ac47cc660dd946acebe6f4ae55f3c5",
+        "outputShape": [
+          "$text"
+        ],
+        "metrics": {
+          "turns": 1,
+          "toolCalls": 2,
+          "tokens": 0,
+          "costUsd": 0
+        },
+        "eventTypes": [],
+        "toolOrder": [
+          "ws_list_files",
+          "ws_read_file"
+        ],
+        "artifactPaths": [
+          "report/report.md"
+        ],
+        "permissionDenials": []
+      },
+      "pi": {
+        "status": "succeeded",
+        "stopReason": "final",
+        "schemaValid": true,
+        "schemaErrors": [],
+        "outputDigest": "sha256:44a5eec24b33ea96f2a893f5545d6e9061ac47cc660dd946acebe6f4ae55f3c5",
+        "outputShape": [
+          "$text"
+        ],
+        "metrics": {
+          "turns": 1,
+          "toolCalls": 0,
+          "tokens": 100,
+          "costUsd": 0
+        },
+        "eventTypes": [
+          "agent.started",
+          "tool.started",
+          "tool.started",
+          "tool.completed",
+          "tool.completed",
+          "agent.turn.completed",
+          "agent.stopped"
+        ],
+        "toolOrder": [
+          "ws_list_files",
+          "ws_read_file"
+        ],
+        "artifactPaths": [
+          "report/report.md"
+        ],
+        "permissionDenials": []
+      },
+      "diff": {
+        "outputDigestMatch": true,
+        "outputShapeAgreementPct": 100,
+        "stopReasonMatch": true,
+        "toolOrderMatch": true,
+        "artifactPathsMatch": true
+      }
+    },
+    {
+      "caseId": "googl",
+      "runId": "googl:requirement-reviewer:shadow",
+      "projectId": "googl",
+      "contractId": "requirement-reviewer",
+      "contractVersion": "1.0.0",
+      "legacy": {
+        "status": "succeeded",
+        "stopReason": "final",
+        "schemaValid": true,
+        "schemaErrors": [],
+        "outputDigest": "sha256:c305606ce503d71772b4108f030e5ee2f6c9addddc78505135e0883dc66df425",
+        "outputShape": [
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "asOf",
+          "contractVersion",
+          "createdAt",
+          "evidenceRefs",
+          "evidenceRefs[]",
+          "inputDigest",
+          "issues",
+          "issues[]",
+          "producer",
+          "reviewerType",
+          "schemaVersion",
+          "score",
+          "score",
+          "verdict"
+        ],
+        "metrics": {
+          "turns": 1,
+          "toolCalls": 2,
+          "tokens": 0,
+          "costUsd": 0
+        },
+        "eventTypes": [],
+        "toolOrder": [
+          "ws_list_files",
+          "ws_read_file"
+        ],
+        "artifactPaths": [
+          "analysis/reviews/requirements_r1.json"
+        ],
+        "permissionDenials": [],
+        "review": {
+          "reviewerType": "requirements",
+          "verdict": "pass",
+          "issueCount": 0,
+          "criticalIssueCount": 0,
+          "issueOwners": []
+        }
+      },
+      "pi": {
+        "status": "succeeded",
+        "stopReason": "final",
+        "schemaValid": true,
+        "schemaErrors": [],
+        "outputDigest": "sha256:c305606ce503d71772b4108f030e5ee2f6c9addddc78505135e0883dc66df425",
+        "outputShape": [
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "$text",
+          "asOf",
+          "contractVersion",
+          "createdAt",
+          "evidenceRefs",
+          "evidenceRefs[]",
+          "inputDigest",
+          "issues",
+          "issues[]",
+          "producer",
+          "reviewerType",
+          "schemaVersion",
+          "score",
+          "score",
+          "verdict"
+        ],
+        "metrics": {
+          "turns": 1,
+          "toolCalls": 0,
+          "tokens": 100,
+          "costUsd": 0
+        },
+        "eventTypes": [
+          "agent.started",
+          "tool.started",
+          "tool.started",
+          "tool.completed",
+          "tool.completed",
+          "agent.turn.completed",
+          "agent.stopped"
+        ],
+        "toolOrder": [
+          "ws_list_files",
+          "ws_read_file"
+        ],
+        "artifactPaths": [
+          "analysis/reviews/requirements_r1.json"
+        ],
+        "permissionDenials": [],
+        "review": {
+          "reviewerType": "requirements",
+          "verdict": "pass",
+          "issueCount": 0,
+          "criticalIssueCount": 0,
+          "issueOwners": []
+        }
+      },
+      "diff": {
+        "outputDigestMatch": true,
+        "outputShapeAgreementPct": 100,
+        "stopReasonMatch": true,
+        "toolOrderMatch": true,
+        "artifactPathsMatch": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finagent.local/schemas/research/reviewResult.v1.schema.json",
+  "title": "ReviewResult v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "asOf", "producer", "contractVersion", "inputDigest", "createdAt", "evidenceRefs", "reviewerType", "score", "issues", "verdict"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" }, "asOf": { "type": "string", "format": "date-time" }, "producer": { "type": "string" }, "contractVersion": { "type": "string" }, "inputDigest": { "type": "string" }, "createdAt": { "type": "string", "format": "date-time" }, "evidenceRefs": { "type": "array", "items": { "type": "string" } },
+    "reviewerType": { "enum": ["evidence", "requirements", "logic"] }, "score": { "type": "number", "minimum": 0, "maximum": 1 },
+    "issues": { "type": "array", "items": { "type": "object", "required": ["id", "severity", "owner", "message", "remediation"], "properties": { "id": { "type": "string" }, "severity": { "enum": ["info", "warning", "critical"] }, "owner": { "enum": ["data", "industry", "company", "report", "system"] }, "message": { "type": "string" }, "location": { "type": "string" }, "claim": { "type": "string" }, "evidenceRefs": { "type": "array", "items": { "type": "string" } }, "remediation": { "type": "string" } }, "additionalProperties": false } },
+    "verdict": { "enum": ["pass", "remediate", "human-review"] }
+  }
+}

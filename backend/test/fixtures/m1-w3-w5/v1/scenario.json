@@ -1,0 +1,225 @@
+{
+  "schemaVersion": "m1-w3-w5-fixture.v1",
+  "fixtureId": "m1-w3-w5-production-composition-v1",
+  "description": "Deterministic W3-W5 production-composition fixture for the one-shot M1 gate.",
+  "run": {
+    "runId": "idea_run_m1_w3_w5_v1",
+    "asOf": "2026-07-23T12:00:00.000Z",
+    "requestedCount": 2,
+    "stopAfterNodeId": "review-quality"
+  },
+  "expectedBaselines": {
+    "agentCount": 24,
+    "toolCount": 75,
+    "ideaGenerationWorkflowId": "idea-generation.v2",
+    "ideaGenerationWorkflowVersion": "2.0.0",
+    "ideaGenerationWorkflowHash": "sha256:087c7781a753b1c5f936993ed1d9d91771fe89fc6bac1411a886aa950630f1eb",
+    "ideaScopeId": "idea-universe:local-user",
+    "runAnalysisWorkflowHash": "sha256:decbf7241130fe78faa470ed2bba979240e73b681d3477b89a19c6ce983546eb",
+    "generatorPoolTarget": 8,
+    "heldThemes": [
+      "grid infrastructure"
+    ],
+    "heavyThemes": [
+      "grid infrastructure(1)"
+    ],
+    "validGeneratedCount": 4,
+    "rawGeneratedCount": 7,
+    "rejectionReasons": [
+      "duplicate-prior-output",
+      "missing-title",
+      "all-tickers-invalid"
+    ],
+    "validGeneratedTitles": [
+      "Grid equipment backlog reacceleration",
+      "Electrical components pricing durability",
+      "Power semiconductor inventory normalization",
+      "Data-center thermal infrastructure utilization"
+    ],
+    "selectedValidTitles": [
+      "Grid equipment backlog reacceleration",
+      "Power semiconductor inventory normalization"
+    ],
+    "unselectedValidTitles": [
+      "Electrical components pricing durability",
+      "Data-center thermal infrastructure utilization"
+    ],
+    "lowRankSelectedTitle": "Power semiconductor inventory normalization",
+    "sourceOnlyTitle": "PWR thesis can be extended into suppliers, peers, or hedges if the original grid infrastructure driver remains valid."
+  },
+  "project": {
+    "title": "Existing M1 Project",
+    "ticker": "EXST",
+    "randomValue": 0.42424242,
+    "privateSentinel": "m1-project-private-workspace-sentinel-v1"
+  },
+  "inputs": {
+    "positions": [
+      {
+        "id": "position_m1_1",
+        "ticker": "PWR",
+        "name": "Quanta Services",
+        "theme": "grid infrastructure",
+        "reason": "Captured portfolio input for deterministic diversification.",
+        "weight": 0.08,
+        "rank": 1,
+        "confidence": 0.75,
+        "status": "active",
+        "addedAt": 1760000000000
+      }
+    ],
+    "mandate": {
+      "style": "balanced",
+      "minMarketCap": 1000000000,
+      "maxLeverage": 4,
+      "minCandidates": 2,
+      "maxCandidates": 20,
+      "maxHoldings": 10,
+      "convexityBonus": 0.15,
+      "horizonPref": "6-12M",
+      "allowDataGap": false,
+      "maxProjectAgeDays": 45
+    },
+    "settings": {
+      "DEFAULT_PROVIDER": "openai-compatible",
+      "DEEPSEEK_MODEL": "deepseek-v4-pro",
+      "SMALL_PROVIDER": "",
+      "SMALL_MODEL": "",
+      "MAIN_PROVIDER": "",
+      "MAIN_MODEL": "",
+      "REFLECTION_PROVIDER": "openai-compatible",
+      "REFLECTION_MODEL": "gpt-5.6-sol",
+      "UI_LANGUAGE": "zh",
+      "ANALYSIS_LANGUAGE": "en",
+      "REPORT_LANGUAGE": "en",
+      "DEMO_MODE": false,
+      "OPENAI_COMPATIBLE_MODEL": "gpt-5.6-sol",
+      "OPENAI_COMPATIBLE_REASONING_LEVEL": "high"
+    }
+  },
+  "market": {
+    "top": [
+      "Industrials"
+    ],
+    "bottom": [
+      "Utilities"
+    ],
+    "headlines": [
+      "Grid capital spending remains elevated"
+    ],
+    "sectorTable": [
+      "Industrials +1.2%"
+    ],
+    "research": [],
+    "saIdeas": [],
+    "sourcesUsed": [
+      "m1-fixture-market"
+    ],
+    "domainsUsed": [
+      "power-infrastructure"
+    ],
+    "hasData": true,
+    "demoMode": false
+  },
+  "tickerVerification": {
+    "valid": [
+      "GEV",
+      "ETN",
+      "ON",
+      "VRT",
+      "PWR"
+    ]
+  },
+  "generator": {
+    "ideas": [
+      {
+        "title": "Grid equipment backlog reacceleration",
+        "theme": "grid equipment",
+        "heat": 93,
+        "rationale": "Multi-year utility orders can extend the backlog conversion runway.",
+        "tickers": [
+          "GEV"
+        ],
+        "catalyst": "Backlog conversion",
+        "edge": "Consensus may understate duration."
+      },
+      {
+        "title": "  GRID equipment backlog reacceleration  ",
+        "theme": "grid equipment",
+        "heat": 88,
+        "rationale": "This deliberately duplicates the first normalized title.",
+        "tickers": [
+          "GEV"
+        ],
+        "catalyst": "Duplicate",
+        "edge": "Duplicate"
+      },
+      {
+        "theme": "malformed",
+        "heat": 70,
+        "rationale": "This output deliberately omits a title.",
+        "tickers": [
+          "ETN"
+        ]
+      },
+      {
+        "title": "Electrical components pricing durability",
+        "theme": "electrical components",
+        "heat": 81,
+        "rationale": "Mix and capacity constraints can support pricing longer than expected.",
+        "tickers": [
+          "ETN"
+        ],
+        "catalyst": "Capacity expansion",
+        "edge": "Pricing durability is under-modeled."
+      },
+      {
+        "title": "Power semiconductor inventory normalization",
+        "theme": "power semiconductors",
+        "heat": 67,
+        "rationale": "Channel normalization can reveal an earnings trough.",
+        "tickers": [
+          "ON"
+        ],
+        "catalyst": "Inventory normalization",
+        "edge": "The trough may arrive before consensus."
+      },
+      {
+        "title": "Unverifiable ticker output",
+        "theme": "invalid ticker",
+        "heat": 62,
+        "rationale": "This candidate deliberately contains only an invalid ticker.",
+        "tickers": [
+          "ZZZINVALID"
+        ],
+        "catalyst": "None",
+        "edge": "None"
+      },
+      {
+        "title": "Data-center thermal infrastructure utilization",
+        "theme": "data-center infrastructure",
+        "heat": 59,
+        "rationale": "Higher rack density can tighten thermal infrastructure utilization.",
+        "tickers": [
+          "VRT"
+        ],
+        "catalyst": "Rack-density deployments",
+        "edge": "Thermal content growth may be underestimated."
+      }
+    ]
+  },
+  "reviewer": {
+    "selected": [
+      {
+        "index": 0,
+        "score": 96,
+        "reason": "Highest-conviction backlog and catalyst combination."
+      },
+      {
+        "index": 2,
+        "score": 41,
+        "reason": "Lower-ranked but still structurally valid candidate."
+      }
+    ]
+  }
+}

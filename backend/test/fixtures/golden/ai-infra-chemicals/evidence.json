@@ -1,0 +1,7 @@
+{
+  "snapshot": "ai-infra-chemicals-contract-v1",
+  "items": [
+    { "id": "c1", "claim": "Materials demand follows wafer-start and process-intensity changes with a lag", "sourceRef": "fixture:industry" },
+    { "id": "c2", "claim": "Listed US names may be proxies rather than pure-play beneficiaries", "sourceRef": "fixture:comps" }
+  ]
+}

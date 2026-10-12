@@ -1,0 +1,7 @@
+{
+  "snapshot": "googl-contract-v1",
+  "items": [
+    { "id": "g1", "claim": "Cloud and Search are the principal earnings engines", "sourceRef": "fixture:10q" },
+    { "id": "g2", "claim": "AI capex must translate into revenue and margin evidence", "sourceRef": "fixture:transcript" }
+  ]
+}

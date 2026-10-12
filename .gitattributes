@@ -1,0 +1,2 @@
+# Preserve Markdown hard line breaks in captured evaluation reports.
+artifacts/evals/**/report.md whitespace=-blank-at-eol

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finagent.local/schemas/research/evidenceBundle.v1.schema.json",
+  "title": "EvidenceBundle v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "asOf", "producer", "contractVersion", "inputDigest", "createdAt", "evidenceRefs", "sourceRefs", "items", "events", "coverage", "contradictions", "gaps", "nextRequests", "claimAudit", "openIssues"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" }, "asOf": { "type": "string", "format": "date-time" }, "producer": { "type": "string" }, "contractVersion": { "type": "string" }, "inputDigest": { "type": "string" }, "createdAt": { "type": "string", "format": "date-time" }, "evidenceRefs": { "type": "array", "items": { "type": "string" } },
+    "sourceRefs": { "type": "array", "items": { "type": "string" } },
+    "items": { "type": "array", "items": { "type": "object" } },
+    "events": { "type": "array", "items": { "type": "object" } },
+    "coverage": { "type": "object" },
+    "contradictions": { "type": "array", "items": { "type": "object" } },
+    "gaps": { "type": "array", "items": { "type": "string" } },
+    "nextRequests": { "type": "array", "items": { "type": "object" } },
+    "claimAudit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["materialClaims", "supportedClaims", "estimateClaims", "openIssueClaims", "classifiedClaims", "classificationRate", "citationCoverage"],
+      "properties": {
+        "materialClaims": { "type": "integer", "minimum": 0 },
+        "supportedClaims": { "type": "integer", "minimum": 0 },
+        "estimateClaims": { "type": "integer", "minimum": 0 },
+        "openIssueClaims": { "type": "integer", "minimum": 0 },
+        "classifiedClaims": { "type": "integer", "minimum": 0 },
+        "classificationRate": { "type": "number", "minimum": 0, "maximum": 1 },
+        "citationCoverage": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "openIssues": { "type": "array", "items": { "type": "object" } }
+  }
+}
